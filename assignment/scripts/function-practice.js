@@ -99,22 +99,59 @@ console.log('Testing find, should return false', find(false, testArray2) );
 // 8. Function to check if a letter is the first letter in a
 //    string. Return true if it is, and false otherwise
 function isFirstLetter(letter, string) {
-
-}
+  if (string.charAt(0) === letter) {
+    return true;
+  } // Checks first letter of whatever was input as string and returns true if matched
+  else {
+    return false;
+  } // Returns false if the first letter doesn't match
+} // end isFirstLetter
 console.log( 'isFirstLetter - should say true', isFirstLetter('a', 'apple') );
 console.log( 'isFirstLetter - should say false', isFirstLetter('z', 'apple') );
 
 // 9. Function to return the sum of all numbers in an array
-function sumAll( ) {
+function sumAll( array ) {
   let sum = 0
   // TODO: loop to add items
+  for (i=0; i<array.length; i++) {
+    sum += array[i];
+  }
   return sum;
-}
+} // end sumAll
 
+// Using a built-in we could have done this as:
+function sumAll2( array ) {
+  return array.reduce( (a,b) => {return a + b } );
+    // Reduce returns the values in an array as a single value having done a process
+    // to each. In this case, our variable 'a' is used as an accumulator, like our variable
+    // 'sum' above. Our variable 'b' is the value at each index of the array as reduce()
+    // iterates, taking the place of our for loop. The body of the reduce function is
+    // adding each new value of 'b' to each accumulating value of 'a'.
+} // end sumAll2
+
+console.log( 'Testing sumAll, should return 10:', sumAll(testArray1) );
+console.log( 'Testing sumAll2, should return 10:', sumAll2(testArray1) );
 // 10. Function to return a new array of all positive (greater than zero)
 //     numbers contained in an input array. If there are no positive numbers
 //     return an empty array. Note: The input array should not change.
+const positiveArray = array => {
+  // Using an arrow function for this one, since array is the only parameter I don't
+  // need any () in the function declaration
+  let newArray = [];
+  for (i=0; i<array.length; i++) {
+    if (array[i] > 0) {
+      newArray.push(array[i]);
+    } // Adds values to our new array if they're above 0
+  } // end loop
+  return newArray;
+} // end positiveArray
 
+let negTestArray1 = [-1, -2, -3, -4];
+let mixedTestArray = [1, -2, 3, -4];
+
+console.log(' Testing positiveArray, should return [1, 2, 3, 4]:', positiveArray(testArray1) );
+console.log(' Testing positiveArray, should return: []', positiveArray(negTestArray1) );
+console.log(' Testing positiveArray, should return: [1, 3]', positiveArray(mixedTestArray) );
 
 
 // 11. Pick a problem from Edabit(https://edabit.com/) or
