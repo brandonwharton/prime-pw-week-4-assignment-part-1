@@ -157,3 +157,29 @@ console.log(' Testing positiveArray, should return: [1, 3]', positiveArray(mixed
 // 11. Pick a problem from Edabit(https://edabit.com/) or
 //     CodeWars(https://www.codewars.com/). Then describe it
 //     here in a comment, write the function, and test it!
+
+// I chose a problem that asked you to determine if a string argument is an isogram.
+// An isogram is explained to be a word that has no repeating letters, consecutive
+// or non-consecutive. The challenge also calls out that it should ignore case when
+// determining whether it's an isogram, and that it should assume an empty string.
+// is an isogram. The function should return true if the string is an isogram, and
+// return false if it isn't.
+
+function isIsogram(str){
+  let str2 = str.toLowerCase(); // Ignoring case without altering input string argument
+  for (i=0;i<str2.length;i++) {
+    for(j=i+1;j<str2.length;j++) {
+      if (str2.charAt(j)===str2.charAt(i)) {
+        return false // Returns false if any characters match at any point
+      } // end condition
+    } // end loop
+  } // end loop
+  return true; // If no matches are found through the two loops, returns true
+}
+// Testing
+
+console.log('Checking if isogram is an isogram, expecting true', isIsogram('isogram'));
+console.log('Checking if coral is an isogram, expecting true', isIsogram('coral'));
+console.log('Checking if amphibious is an isogram, expecting false', isIsogram('amphibious'));
+console.log('Checking if an empty string is an isogram, expecting true', isIsogram(' '));
+console.log('Checking if airplAne is an isogram, expecting false', isIsogram('airplAne'));
