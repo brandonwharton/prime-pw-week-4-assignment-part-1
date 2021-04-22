@@ -9,8 +9,7 @@ function hello() {
   return 'Hello World!';
 } // End hello
 // Call the function to test
-console.log('Test - should say "Hello World!"', hello());
-
+console.log('Test - should say "Hello World!":', hello());
 
 // 2. Function to return an personalized hello, for example 'Hello, Jo!'
 function helloName( name ) {
@@ -18,7 +17,6 @@ function helloName( name ) {
 } // End helloName
 console.log('Checking our hello function for Dane:', helloName( 'Dane' ));
 // Remember to call the function to test
-
 
 // 3. Function to add two numbers together & return the result
 function addNumbers( firstNumber, secondNumber ) {
@@ -28,7 +26,7 @@ function addNumbers( firstNumber, secondNumber ) {
 console.log('Checking our addition function for 13 and 26:', addNumbers(13,26));
 
 // 4. Function to multiply three numbers & return the result
-function multiplyThree( num1, num2, num3 ){
+function multiplyThree( num1, num2, num3 ) {
   return num1 * num2 * num3;
 } // End multiplyThree
 console.log('Testing our three number multiplier for 3, 4, and 5:', multiplyThree(3,4,5));
@@ -60,18 +58,19 @@ function getLast( array ) {
 let blankArray = [];
 let testArray1 = [1, 2, 3, 4];
 let testArray2 = ['Five', 'Six', 'Seven', true];
+let testArray3 = [5, 6, 7, 8];
 
 console.log('Testing getLast, should return undefined:', getLast(blankArray));
 console.log('Testing getLast, should return 4:', getLast(testArray1));
-console.log(`Testing getLast, should return 'Seven':`, getLast(testArray2));
+console.log(`Testing getLast, should return true:`, getLast(testArray2));
 
 
 // 7. Function to find a value in an array. Return true if the
 //    value is found and false otherwise. Use a loop;
 //    DO NOT use Array.includes, Array.indexOf, or Array.find
-function find( value, array ){
+function find( value, array ) {
   let truthCheck; // Placeholder variable for later
-  for (i=0; i<array.length; i++) {
+  for (let i=0; i<array.length; i++) {
     if (value === array[i]) {
       truthCheck =true;
       break; // As soon as we've found a value there's no need to continue the loop
@@ -88,11 +87,27 @@ function find( value, array ){
   } // Returns false if value was never found
 } // end find
 
+// After my Codewars stretch goal, and this exact discussion in class, I realized
+// there was a much more elegant way to do this. Case and point: there are many ways
+// to do a thing, but only one that you'll use often.
+function find2( value, array ) {
+  for (let index of array) {
+    if (value === index) {
+      return true;
+    } // end conditional
+  } // end loop
+  return false; // if entire loop runs and nothing is found, returns false
+} // end find2
+
 console.log('Testing find, should return true:', find(3, testArray1) );
 console.log('Testing find, should return true:', find('Six', testArray2) );
 console.log('Testing find, should return false', find(5, testArray1) );
 console.log('Testing find, should return false', find(false, testArray2) );
 
+console.log('Testing find2, should return true:', find2(3, testArray1) );
+console.log('Testing find2, should return true:', find2('Six', testArray2) );
+console.log('Testing find2, should return false', find2(5, testArray1) );
+console.log('Testing find2, should return false', find2(false, testArray2) );
 // ----------------------
 // Stretch Goals
 // ----------------------
@@ -110,10 +125,12 @@ console.log( 'isFirstLetter - should say true', isFirstLetter('a', 'apple') );
 console.log( 'isFirstLetter - should say false', isFirstLetter('z', 'apple') );
 
 // 9. Function to return the sum of all numbers in an array
+
+
 function sumAll( array ) {
   let sum = 0
   // TODO: loop to add items
-  for (i=0; i<array.length; i++) {
+  for (let i=0; i<array.length; i++) {
     sum += array[i];
   }
   return sum;
@@ -129,8 +146,22 @@ function sumAll2( array ) {
     // adding each new value of 'b' to each accumulating value of 'a'.
 } // end sumAll2
 
+// Making sumAll as a for of loop
+function sumAll3 ( array ) {
+  let sum = 0;
+  // TODO: loop to add items
+  for (let number of array) {
+    sum += number;
+  }
+  return sum;
+} // end sumAll
+
 console.log( 'Testing sumAll, should return 10:', sumAll(testArray1) );
 console.log( 'Testing sumAll2, should return 10:', sumAll2(testArray1) );
+console.log( 'Testing sumAll3, should return 10:', sumAll3(testArray1) );
+console.log( 'Testing sumAll, should return 26:', sumAll(testArray3) );
+console.log( 'Testing sumAll2, should return 26:', sumAll2(testArray3) );
+console.log( 'Testing sumAll3, should return 26:', sumAll3(testArray3) );
 // 10. Function to return a new array of all positive (greater than zero)
 //     numbers contained in an input array. If there are no positive numbers
 //     return an empty array. Note: The input array should not change.
@@ -138,7 +169,7 @@ const positiveArray = array => {
   // Using an arrow function for this one, since array is the only parameter I don't
   // need any () in the function declaration
   let newArray = [];
-  for (i=0; i<array.length; i++) {
+  for (let i=0; i<array.length; i++) {
     if (array[i] > 0) {
       newArray.push(array[i]);
     } // Adds values to our new array if they're above 0
@@ -146,6 +177,16 @@ const positiveArray = array => {
   return newArray;
 } // end positiveArray
 
+// Making positiveArray into a for of loop
+const positiveArray2 = array => {
+  let newArray = [];
+  for (let index of array) {
+    if (index > 0) {
+      newArray.push(index);
+    } // end conditional
+  } // end loop
+  return newArray;
+} // end positiveArray
 let negTestArray1 = [-1, -2, -3, -4];
 let mixedTestArray = [1, -2, 3, -4];
 
@@ -153,6 +194,9 @@ console.log(' Testing positiveArray, should return [1, 2, 3, 4]:', positiveArray
 console.log(' Testing positiveArray, should return: []', positiveArray(negTestArray1) );
 console.log(' Testing positiveArray, should return: [1, 3]', positiveArray(mixedTestArray) );
 
+console.log(' Testing positiveArray2, should return [1, 2, 3, 4]:', positiveArray2(testArray1) );
+console.log(' Testing positiveArray2, should return: []', positiveArray2(negTestArray1) );
+console.log(' Testing positiveArray2, should return: [1, 3]', positiveArray2(mixedTestArray) );
 
 // 11. Pick a problem from Edabit(https://edabit.com/) or
 //     CodeWars(https://www.codewars.com/). Then describe it
@@ -165,10 +209,10 @@ console.log(' Testing positiveArray, should return: [1, 3]', positiveArray(mixed
 // is an isogram. The function should return true if the string is an isogram, and
 // return false if it isn't.
 
-function isIsogram(str){
+function isIsogram(str) {
   let str2 = str.toLowerCase(); // Ignoring case without altering input string argument
-  for (i=0;i<str2.length;i++) {
-    for(j=i+1;j<str2.length;j++) {
+  for (let i=0;i<str2.length;i++) {
+    for(let j=i+1;j<str2.length;j++) {
       if (str2.charAt(j)===str2.charAt(i)) {
         return false // Returns false if any characters match at any point
       } // end condition
